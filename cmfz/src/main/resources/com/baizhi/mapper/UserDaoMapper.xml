@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDao">
+    <insert id="insert">
+        insert into user VALUES
+        <foreach collection="list" item="li" index="index" separator=",">
+            (#{li.guru_id},#{li.id},#{li.photoImg,jdbcType=VARCHAR},#{li.name},#{li.dharmaName},#{li.sex},#{li.province},#{li.city},#{li.sign},#{li.phoneNum},#{li.password},#{li.salt},#{li.status},#{li.registDate})
+        </foreach>
+    </insert>
+    <select id="queryAll" resultType="User">
+        select * from user
+    </select>
+    <select id="queryAll1" resultType="User">
+        SELECT * FROM  USER limit #{page},#{rows}
+    </select>
+    <select id="cout" resultType="java.lang.Integer">
+        SELECT  COUNT(*) from user
+    </select>
+    <select id="queryDate" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*) from user WHERE DATEDIFF(now(),registDate) &lt; #{li}
+    </select>
+    <select id="queryCentry" parameterType="java.lang.String" resultType="UserDTO">
+        select province name,count(*) value from user where sex=#{name} GROUP BY province
+    </select>
+</mapper>
+
+
+
+
+
+
+

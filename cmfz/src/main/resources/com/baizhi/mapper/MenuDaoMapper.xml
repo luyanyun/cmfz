@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.MenuDao">
+    <resultMap id="en" type="Menu">
+        <id column="mid" property="id"/>
+        <result column="mtitle" property="title"/>
+        <result column="mcontent" property="content"/>
+        <result column="mhref" property="href"/>
+        <result column="miconCls" property="iconCls"/>
+        <collection property="menus" ofType="Menu">
+            <id column="cid" property="id"/>
+            <result column="ctitle" property="title"/>
+            <result column="ccontent" property="content"/>
+            <result column="chref" property="href"/>
+            <result column="ciconCls" property="iconCls"/>
+        </collection>
+    </resultMap>
+    <select id="queryAll" resultMap="en">
+        SELECT m.id mid,m.title mtitle,m.content mcontent,m.href mhref,m.iconCls miconCls
+         ,c.id cid,c.title ctitle,c.content ccontent,c.href chref,c.iconCls ciconCls
+         from menu m left join menu c on c.parentId=m.id WHERE m.parentId=0
+    </select>
+
+</mapper>
+
+
+
+
+
+
+

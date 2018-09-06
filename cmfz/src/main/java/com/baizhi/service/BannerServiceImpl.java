@@ -54,4 +54,11 @@ public class BannerServiceImpl implements BannerService {
     public void save(Integer id, Integer status) {
         bannerDao.save(id, status);
     }
+
+    @Override
+    public List<Banner> queryStatus() {
+        List<Banner> banners = bannerDao.queryByStatus(1);
+        return banners;
+    }
+
 }
